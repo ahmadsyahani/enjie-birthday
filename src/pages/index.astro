@@ -14,16 +14,17 @@ const emojis = ['🎀', '✨', '🌸', '💖', '🦋', '💌', '🌷', '🌻'];
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Happy Birthday Enjie! 💖</title>
-    <link rel="icon" type="image/jpeg" href="/bear.jpg" />
+    <link rel="icon" type="image/jpeg" href="/bear.jpg"/>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.cdnfonts.com/css/apple-color-emoji" rel="stylesheet">
     
     <style is:global>
       body {
-        font-family: 'Plus Jakarta Sans', sans-serif;
+        font-family: 'Plus Jakarta Sans', 'Apple Color Emoji', sans-serif;
       }
-      
+
       .custom-scrollbar::-webkit-scrollbar { width: 6px; }
       .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
       .custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(200, 200, 200, 0.5); border-radius: 10px; }
@@ -33,12 +34,21 @@ const emojis = ['🎀', '✨', '🌸', '💖', '🦋', '💌', '🌷', '🌻'];
       .no-scrollbar::-webkit-scrollbar { display: none; }
       .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
       
+      @keyframes balloonFloat {
+        0% { transform: translateY(0px) rotate(0deg); opacity: 0; }
+        10% { opacity: 1; }
+        90% { opacity: 1; }
+        100% { transform: translateY(-100vh) rotate(15deg); opacity: 0; }
+      }
+      .balloon-float { animation: balloonFloat 18s linear infinite; transform-origin: bottom center; }
+
       @keyframes flowerBloom {
         0%, 100% { transform: scale(1) translateY(0); filter: brightness(1); }
         50% { transform: scale(1.15) translateY(-5px); filter: brightness(1.1); }
       }
       .flower-bloom { animation: flowerBloom 4s ease-in-out infinite; transform-origin: bottom center; }
-
+      
+      /* HARDWARE ACCELERATION BIAR ANIMASI LEBIH SMOOTH */
       .gallery-item, #closure-card, #letter-content, #envelope-body {
         will-change: transform, opacity;
         transform: translateZ(0);
@@ -51,7 +61,7 @@ const emojis = ['🎀', '✨', '🌸', '💖', '🦋', '💌', '🌷', '🌻'];
     <button id="music-toggle" class="fixed bottom-6 right-6 z-[60] w-12 h-12 bg-white/70 backdrop-blur-md border border-white/50 rounded-full shadow-lg flex items-center justify-center text-xl transition-all duration-300 hover:scale-110 active:scale-95 opacity-0 pointer-events-none">
       <span id="music-icon">🔈</span>
     </button>
-    <audio id="bg-music" src="/music/KasihPutih.mp3" loop></audio>
+    <audio id="bg-music" src="/KasihPutih.mp3" loop></audio>
 
     <div class="fixed inset-0 pointer-events-none z-0 overflow-hidden opacity-60 text-3xl md:text-4xl">
       <div class="absolute top-12 left-6 animate-float">🧸</div>
@@ -141,13 +151,13 @@ const emojis = ['🎀', '✨', '🌸', '💖', '🦋', '💌', '🌷', '🌻'];
 
       <footer class="relative z-10 pt-16 pb-12 bg-gradient-to-b from-pink-100 to-[#ffe4e6] text-center overflow-hidden border-t border-pink-200">
         <div class="absolute bottom-0 left-0 w-full flex justify-around px-2 md:px-10 pointer-events-none opacity-80 z-0 items-end">
-          <div class="text-4xl md:text-8xl flower-bloom" style="animation-delay: 0s;">🌻</div>
-          <div class="text-4xl md:text-8xl flower-bloom" style="animation-delay: 1.5s;">🌷</div>
-          <div class="text-4xl md:text-8xl flower-bloom" style="animation-delay: 0.8s;">🌸</div>
-          <div class="text-4xl md:text-8xl flower-bloom" style="animation-delay: 2.2s;">🌺</div>
-          <div class="text-4xl md:text-8xl flower-bloom" style="animation-delay: 0.5s;">🌸</div>
-          <div class="text-4xl md:text-8xl flower-bloom" style="animation-delay: 1.8s;">🌷</div>
-          <div class="text-4xl md:text-8xl flower-bloom transform -scale-x-100" style="animation-delay: 1.2s;">🌻</div>
+          <div class="text-5xl md:text-7xl flower-bloom" style="animation-delay: 0s;">🌻</div>
+          <div class="text-6xl md:text-8xl flower-bloom" style="animation-delay: 1.5s;">🌷</div>
+          <div class="text-5xl md:text-7xl flower-bloom" style="animation-delay: 0.8s;">🌸</div>
+          <div class="text-7xl md:text-9xl flower-bloom" style="animation-delay: 2.2s;">🌺</div>
+          <div class="text-5xl md:text-7xl flower-bloom" style="animation-delay: 0.5s;">🌼</div>
+          <div class="text-6xl md:text-8xl flower-bloom" style="animation-delay: 1.8s;">🌷</div>
+          <div class="text-5xl md:text-7xl flower-bloom transform -scale-x-100" style="animation-delay: 1.2s;">🌻</div>
         </div>
         <div class="relative z-10 bg-white/90 backdrop-blur-md inline-block px-8 py-4 rounded-full shadow-md border border-pink-200 mb-6 mt-4">
           <p class="text-gray-500 font-body text-sm font-medium tracking-wide">
@@ -255,12 +265,17 @@ const emojis = ['🎀', '✨', '🌸', '💖', '🦋', '💌', '🌷', '🌻'];
 
       gsap.registerPlugin(ScrollTrigger);
 
+      // SETTINGAN LENIS LEBIH SMOOTH
       const lenis = new Lenis({ 
         duration: 1.2, 
-        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), 
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
         smoothWheel: true,
-        touchMultiplier: 2, 
+        touchMultiplier: 2,
       });
+      
+      lenis.on('scroll', ScrollTrigger.update);
+      gsap.ticker.add((time) => lenis.raf(time * 1000));
+      gsap.ticker.lagSmoothing(0);
 
       const bgMusic = document.getElementById('bg-music') as HTMLAudioElement;
       const musicToggle = document.getElementById('music-toggle');
@@ -278,7 +293,6 @@ const emojis = ['🎀', '✨', '🌸', '💖', '🦋', '💌', '🌷', '🌻'];
         updateMusicUI();
       });
 
-      // Animasi Element Biasa
       gsap.from(".hero-element", { duration: 1.2, y: 40, opacity: 0, stagger: 0.15, ease: "power3.out", delay: 0.2 });
       gsap.from("#closure-card", {
         scrollTrigger: { trigger: "#closure-card", start: "top 80%" },
@@ -423,17 +437,13 @@ const emojis = ['🎀', '✨', '🌸', '💖', '🦋', '💌', '🌷', '🌻'];
         setTimeout(openSurpriseModal, 500);
       });
 
-      // LOGIKA TOMBOL AAMIIN (Munculin Pop Up)
       btnAamiin?.addEventListener('click', () => {
-        // Tembakin confeti kecil
         confetti({ particleCount: 50, spread: 40, origin: { y: 0.8 }, zIndex: 100 });
         
         if (popupMsg) {
-          // Munculin popup
           popupMsg.classList.remove('opacity-0', 'scale-50', 'pointer-events-none');
           popupMsg.classList.add('opacity-100', 'scale-100');
           
-          // Sembunyiin lagi otomatis setelah 4 detik
           setTimeout(() => {
             popupMsg.classList.remove('opacity-100', 'scale-100');
             popupMsg.classList.add('opacity-0', 'scale-50', 'pointer-events-none');
