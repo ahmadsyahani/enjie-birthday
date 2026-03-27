@@ -7,8 +7,6 @@ const imageList = Object.values(images);
 
 const borderColors = ['border-pink-300', 'border-purple-300', 'border-blue-300', 'border-yellow-300', 'border-teal-300'];
 const tapeColors = ['bg-pink-300/70', 'bg-yellow-300/70', 'bg-blue-300/70', 'bg-purple-300/70'];
-
-// Daftar emoji buat stiker polaroid
 const emojis = ['🎀', '✨', '🌸', '💖', '🦋', '💌', '🌷', '🌻'];
 ---
 <html lang="id" class="scroll-smooth">
@@ -137,12 +135,14 @@ const emojis = ['🎀', '✨', '🌸', '💖', '🦋', '💌', '🌷', '🌻'];
             <img src="https://emojicdn.elk.sh/💖" class="w-8 md:w-10" alt="💖"/>
             <img src="https://emojicdn.elk.sh/🙏" class="w-8 md:w-10" alt="🙏"/>
           </div>
-          <h2 class="font-heading text-3xl text-pink-600 font-medium mb-4 tracking-tight">A Birthday Wish For You</h2>
-          <p class="text-gray-600 font-body text-sm leading-relaxed mb-8 px-2 justify">
-            Harapanku buat kamu, semoga tahun ini penuh dengan hal-hal baik, tawa yang lepas, dan mimpi-mimpi yang jadi nyata.<br><br>
-            Aku akan selalu ada buat dukung kamu, di setiap langkah kamu.<br><br>
-            Stay happy, Stay healthy, My Enjie <img src="https://emojicdn.elk.sh/💖" class="w-4 inline-block align-middle" alt="💖"/><img src="https://emojicdn.elk.sh/🐻" class="w-4 inline-block align-middle" alt="🐻"/>
-          </p>
+          
+          <h2 class="font-heading text-2xl md:text-3xl text-pink-600 font-medium mb-4 tracking-tight">A Birthday Wish For You</h2>
+          
+            <p class="text-gray-600 font-body text-sm md:text-base leading-relaxed mb-8 px-2 text-center">
+                Harapanku buat kamu, semoga tahun ini penuh dengan hal baik, tawa yang lepas, dan mimpi mimpi yang menjadi nyata.<br><br>
+                Aku akan selalu ada buat dukung kamu, di setiap langkah kamu.<br><br>
+                Stay happy, Stay healthy, Stay Cheerful <br> My Enjie <img src="https://emojicdn.elk.sh/💖" class="w-4 inline-block align-middle" alt="💖"/><img src="https://emojicdn.elk.sh/🐻" class="w-4 inline-block align-middle" alt="🐻"/>
+            </p>
           
           <button id="btn-aamiin" class="bg-gradient-to-r from-purple-400 to-pink-500 text-white font-bold py-3 px-8 rounded-full shadow-lg hover:scale-105 active:scale-95 transition-all">
             Bilang "Aamiin" <img src="https://emojicdn.elk.sh/💌" class="w-5 inline-block align-middle ml-1" alt="💌"/>
@@ -163,7 +163,7 @@ const emojis = ['🎀', '✨', '🌸', '💖', '🦋', '💌', '🌷', '🌻'];
         <div class="relative z-10 bg-white/90 backdrop-blur-md inline-block px-8 py-4 rounded-full shadow-md border border-pink-200 mb-6 mt-4 flex items-center justify-center mx-auto w-max">
           <span class="text-gray-500 font-body text-sm font-medium tracking-wide">Made with</span>
           <img src="https://emojicdn.elk.sh/💖" class="w-4 inline-block mx-1 animate-pulse" alt="💖"/>
-          <span class="text-gray-500 font-body text-sm font-medium tracking-wide">by <span class="font-bold text-pink-500">Ahsya</span> for <span class="font-bold text-pink-500">Enjie</span></span>
+          <span class="text-gray-500 font-body text-sm font-medium tracking-wide">by <span class="font-bold text-pink-500">Ahsya.</span> for <span class="font-bold text-pink-500">Enjie</span></span>
         </div>
       </footer>
     </div>
@@ -204,7 +204,7 @@ const emojis = ['🎀', '✨', '🌸', '💖', '🦋', '💌', '🌷', '🌻'];
 
             Jangan ragu buat minta tolong ke aku, aku juga seneng kok kamu minta tolong ke aku. Kamu jangan merasa gaenak sama aku yaa cantik.<br><br>
 
-            Semoga ditahun ini dapat membawa lebih banyak kabar bahagia, banyak tawa, datang berkah, dan kejutan manis buat kamu.<br><br>
+            Semoga ditahun ini dapat membawa lebih banyak kabar bahagia, banyak tawa, banyak keberkahan, dan kejutan manis buat kamu.<br><br>
              
             I love you so much, Enjie <img src="https://emojicdn.elk.sh/💖" class="w-5 inline-block align-text-top" alt="💖"/><img src="https://emojicdn.elk.sh/🐻" class="w-5 inline-block align-text-top" alt="🐻"/>
             </span>
@@ -360,7 +360,6 @@ const emojis = ['🎀', '✨', '🌸', '💖', '🦋', '💌', '🌷', '🌻'];
         }, 300);
       }
 
-      // UPGRADE TYPING SCRIPT: Biar ngenalin <img> tag & nggak rusak pas jalanin gambar ios
       function startTyping() {
         if (!textTarget || !textSource || !letterContainer) return;
         textTarget.innerHTML = "";
@@ -371,7 +370,6 @@ const emojis = ['🎀', '✨', '🌸', '💖', '🦋', '💌', '🌷', '🌻'];
         
         typingInterval = setInterval(() => {
           if (i < fullText.length) {
-            // Cek kalau ini adalah tag HTML (misal <img> atau <br>)
             if (fullText.charAt(i) === '<') {
               let tag = '';
               while (fullText.charAt(i) !== '>' && i < fullText.length) {
@@ -379,6 +377,7 @@ const emojis = ['🎀', '✨', '🌸', '💖', '🦋', '💌', '🌷', '🌻'];
                 i++;
               }
               tag += '>';
+              i++; 
               textTarget.innerHTML += tag;
             } else {
               textTarget.innerHTML += fullText.charAt(i);
