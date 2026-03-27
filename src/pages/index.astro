@@ -18,11 +18,20 @@ const emojis = ['🎀', '✨', '🌸', '💖', '🦋', '💌', '🌷', '🌻'];
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link href="https://fonts.cdnfonts.com/css/apple-color-emoji" rel="stylesheet">
     
     <style is:global>
+      /* TRIK TARIK FONT EMOJI IOS DARI GITHUB */
+      @font-face {
+        font-family: 'AppleEmoji';
+        src: url('https://cdn.jsdelivr.net/gh/samuelngs/apple-emoji-linux/apple-color-emoji.woff2') format('woff2');
+        font-weight: normal;
+        font-style: normal;
+        font-display: swap;
+      }
+
+      /* PAKSA SEMUA TEKS PAKE PLUS JAKARTA SANS & EMOJI IOS */
       body {
-        font-family: 'Plus Jakarta Sans', 'Apple Color Emoji', sans-serif;
+        font-family: 'Plus Jakarta Sans', 'AppleEmoji', sans-serif;
       }
 
       .custom-scrollbar::-webkit-scrollbar { width: 6px; }
@@ -48,7 +57,6 @@ const emojis = ['🎀', '✨', '🌸', '💖', '🦋', '💌', '🌷', '🌻'];
       }
       .flower-bloom { animation: flowerBloom 4s ease-in-out infinite; transform-origin: bottom center; }
       
-      /* HARDWARE ACCELERATION BIAR ANIMASI LEBIH SMOOTH */
       .gallery-item, #closure-card, #letter-content, #envelope-body {
         will-change: transform, opacity;
         transform: translateZ(0);
@@ -61,7 +69,7 @@ const emojis = ['🎀', '✨', '🌸', '💖', '🦋', '💌', '🌷', '🌻'];
     <button id="music-toggle" class="fixed bottom-6 right-6 z-[60] w-12 h-12 bg-white/70 backdrop-blur-md border border-white/50 rounded-full shadow-lg flex items-center justify-center text-xl transition-all duration-300 hover:scale-110 active:scale-95 opacity-0 pointer-events-none">
       <span id="music-icon">🔈</span>
     </button>
-    <audio id="bg-music" src="/KasihPutih.mp3" loop></audio>
+    <audio id="bg-music" src="/music/KasihPutih.mp3" loop></audio>
 
     <div class="fixed inset-0 pointer-events-none z-0 overflow-hidden opacity-60 text-3xl md:text-4xl">
       <div class="absolute top-12 left-6 animate-float">🧸</div>
@@ -265,7 +273,6 @@ const emojis = ['🎀', '✨', '🌸', '💖', '🦋', '💌', '🌷', '🌻'];
 
       gsap.registerPlugin(ScrollTrigger);
 
-      // SETTINGAN LENIS LEBIH SMOOTH
       const lenis = new Lenis({ 
         duration: 1.2, 
         easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
