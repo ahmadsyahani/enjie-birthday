@@ -15,8 +15,15 @@ const emojis = ['🎀', '✨', '🌸', '💖', '🦋', '💌', '🌷', '🌻'];
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Happy Birthday Enjie! 💖</title>
     <link rel="icon" type="image/jpeg" href="/bear.jpg" />
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
     <style is:global>
+      body {
+        font-family: 'Plus Jakarta Sans', sans-serif;
+      }
+      
       .custom-scrollbar::-webkit-scrollbar { width: 6px; }
       .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
       .custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(200, 200, 200, 0.5); border-radius: 10px; }
@@ -31,6 +38,12 @@ const emojis = ['🎀', '✨', '🌸', '💖', '🦋', '💌', '🌷', '🌻'];
         50% { transform: scale(1.15) translateY(-5px); filter: brightness(1.1); }
       }
       .flower-bloom { animation: flowerBloom 4s ease-in-out infinite; transform-origin: bottom center; }
+
+      .gallery-item, #closure-card, #letter-content, #envelope-body {
+        will-change: transform, opacity;
+        transform: translateZ(0);
+        backface-visibility: hidden;
+      }
     </style>
   </head>
   <body class="antialiased relative selection:bg-pink-200 selection:text-pink-900 overflow-x-hidden bg-[#fafafa]">
