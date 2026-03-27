@@ -1,0 +1,48 @@
+@import "tailwindcss";
+
+/* Font Premium & Clean: Outfit & Plus Jakarta Sans */
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap');
+
+@theme {
+  --font-family-heading: 'Outfit', sans-serif;
+  --font-family-body: 'Plus Jakarta Sans', sans-serif;
+}
+
+body {
+  background-color: #fafafa;
+  color: #333333;
+  overflow-x: hidden;
+  font-family: var(--font-family-body);
+}
+
+/* Wajib untuk Lenis Smooth Scroll */
+html.lenis, html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
+
+/* Animasi Floating Ornamen */
+@keyframes float {
+  0% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-15px) rotate(3deg); }
+  100% { transform: translateY(0px) rotate(0deg); }
+}
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+/* Class performa tinggi biar GPU HP ngerjain animasinya */
+.will-animate {
+  will-change: transform, opacity;
+}
